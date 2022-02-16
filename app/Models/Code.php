@@ -19,6 +19,14 @@ class Code extends Model
         
     ];
 
-    protected $table ='Code';    /**
+    protected $table ='Code';    
+        public function coder(){
+        return $this->belongsTo(polling::class);
+    }
+
+    public function polling(){
+        return $this->belongsTo(polling::class);
+    }
+
 
 }

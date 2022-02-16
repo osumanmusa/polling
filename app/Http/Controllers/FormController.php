@@ -27,10 +27,10 @@ class FormController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($ps_code)
     {
-        
-       return view('user.forms');
+        $data['ps_code'] = $ps_code;
+       return view('user.forms')->with('data',$data);
     }
 
     /**

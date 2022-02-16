@@ -174,7 +174,7 @@
 										<td>{{$result->EA_NAME}}</td>
 										<td>{{$result->ps_code}}</td>
 										<td>{{$result->polling_station_name}}</td>
-										<td class="text-center text-light"><a class="btn btn-primary" href="{{route('form.create')}}"><i class="fa fa-eye"></i> Get Link</a></td>
+										<td class="text-center text-light"><a class="btn btn-primary" href="{{route('form.create',$result->id,$result->id)}}"><i class="fa fa-eye"></i> Get Link</a></td>
 									</tr>
 									@endforeach
 			

@@ -37,7 +37,7 @@ body {
 }
 .search input {
     
-    text-indent: 25px;
+  
     border: 2px solid #d6d4d4
 }
 
@@ -129,14 +129,15 @@ body {
             <div class="card-body p-4">
                 <form action="{{route('search')}}" method="POST">
                     @csrf
-             <div class="search mb-4 "><select name="code" type="text" class="form-select input_height" placeholder="Have a question? Ask Now"> <option>Select By</option>
-                <option value="ea_code">EA CODE</option>
+             <div class="search mb-4 "><select name="code" type="text" class="form-select input_height" placeholder="Have a question? Ask Now" > <option value="">Select By</option>
+
                 <option value="ea_name">EA NAME</option>
+                <option value="ea_code">EA CODE</option>
                 <option value="ps_name">POLLING STATION NAME</option>
                 <option value="ps_code">POLLING STATION CODE</option>
         </select>
     </div>
-            <div class="search "> <input type="text" class="form-control input_height" name="query" placeholder="Search Here">  </div>
+            <div class="search "> <input type="text" class="form-control input_height" name="query" placeholder="Search Here" required>  </div>
             <div class="d-flex  pull-right  mt-4  ">
             <button type="submit" class="btn btn-primary    "style="border-radius: 6px;"><i class="fa fa-search"></i> Search</button> 
         </div>

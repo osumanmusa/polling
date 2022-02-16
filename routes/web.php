@@ -22,4 +22,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/search',[App\Http\Controllers\HomeController::class, 'search'])->name('search');
 
-Route::get('/create',[App\Http\Controllers\FormController::class, 'create'])->name('form.create');
+Route::get('/create/{id}',[App\Http\Controllers\FormController::class, 'create'])->name('form.create');

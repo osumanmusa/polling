@@ -29,68 +29,34 @@ class HomeController extends Controller
         return view('home');
     }
      public function search(Request $request)
-    { 
+    {
+    $request->validate(['code'=>'required','query'=>'required']);
+    $data=""; 
 
-     $query = $request->get('query');
      $code = $request->get('code');
+     $query = $request->get('query');
+    
 
-$search = DB::table('polling_station')
-        ->join('Code', 'polling_station.code_id', '=', 'Code.id')
-        ->select('polling_station.polling_station_name', 'polling_station.ps_code', 'Code.EA_CODE', 'Code.EA_NAME')
-        ->where('polling_station.ps_code', 'like', '%' . $query . '%')
-        ->paginate(5);
-    return view('user.table', compact('search'));
-
-
-
-     /*
-
-     if ($code =='EA_NAME') {
+     if ($code =='ea_name') {
         
-    $search = DB::table('polling_station')
-        ->join('Code', 'polling_station.code_id', '=', 'Code.id')
-        ->select('polling_station.polling_station_name', 'polling_station.ps_code', 'Code.EA_CODE', 'Code.EA_NAME')
-        ->where('Code.EA_NAME', 'like', '%' . $query . '%')
-        ->paginate(5);
-        dd($search);
-    return view('user.table', compact( '$search'));
+   $data='Code.EA_NAME';
+     }elseif($code =='ea_code'){
+       $data='Code.ea_code';
      }elseif($code=='ps_name'){
-            $search = DB::table('polling_station')
-        ->join('Code', 'polling_station.code_id', '=', 'Code.id')
-        ->select('polling_station.polling_station_name', 'polling_station.ps_code', 'Code.EA_CODE', 'Code.EA_NAME')
-        ->where('polling_station.polling_station_name', 'like', '%' . $query . '%')
-        ->paginate(5);
-        dd($search);
-    return view('user.table', compact( '$search'));
+   $data='polling_station.polling_station_name';
 
      }elseif($code=='ps_code'){
-            $search = DB::table('polling_station')
-        ->join('Code', 'polling_station.code_id', '=', 'Code.id')
-        ->select('polling_station.polling_station_name', 'polling_station.ps_code', 'Code.EA_CODE', 'Code.EA_NAME')
-        ->where('polling_station.ps_code', 'like', '%' . $query . '%')
-        ->paginate(5);
-        dd($search);
-    return view('user.table', compact( '$search'));
-
+           
+           $data='polling_station.ps_code'; 
      }
-            $search = DB::table('polling_station')
-        ->join('Code', 'polling_station.code_id', '=', 'Code.id')
-        ->select('polling_station.polling_station_name', 'polling_station.ps_code', 'Code.EA_CODE', 'Code.EA_NAME')
-        ->where('Code.ea_code', 'like', '%' . $query . '%')
-        ->paginate(5);
-        dd($search);
-    return view('user.table', compact( '$search'));
-    else{
-     $search = DB::table('polling_station')
-        ->join('Code', 'polling_station.code_id', '=', 'Code.id')
-        ->select('polling_station.polling_station_name', 'polling_station.ps_code', 'Code.EA_CODE', 'Code.EA_NAME')
-        ->where('Code.ea_code', 'like', '%' . $query . '%')
-        ->paginate(5);
-        dd($search);
-    return view('user.table', compact( '$search'));
-    }     
+        
 
-*/
+$search = DB::table('polling_station')
+        ->join('Code', 'polling_station.Code_id', '=', 'Code.id')
+        ->select('polling_station.polling_station_name', 'polling_station.ps_code', 'Code.EA_CODE', 'Code.EA_NAME','polling_station.id','Code.id','polling_station.Code_id')
+        ->where($data, 'like', '%' . $query . '%')
+        ->paginate(10);
+    return view('user.table', compact( 'search'));
 
 
     }
