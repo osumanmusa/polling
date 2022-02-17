@@ -29,8 +29,8 @@
 </svg> Chairman</h3></div>
         <div class="card-content">
            <div class="card-body cleartfix">
-                <input type="number" name="ps_code" placeholder='{{$data->ps_code}}' required class="form-control" value="{{$data->ps_code}}" hidden>
-                <input type="number" name="position" placeholder='position' required class="form-control" value="Chairman" hidden>
+                <input type="hidden" name="ps_code"  required  value="{{$data->ps_code}}" >
+                <input type="hidden" name="position"  required value="Chairman" >
            
            
               <div class="form-group">
@@ -40,9 +40,9 @@
                <div class="form-group">
                 <label for="username">Sex<span class="text-danger"> *</span></label>
                 <select class="form-control form-select" name="gender">
-                    <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                  <option value="" disabled selected>Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
                 </select>
               </div>
                <div class="form-group">
@@ -51,7 +51,7 @@
               </div>
                <div class="form-group">
                 <label for="username">  Email(Optional)</label>
-                <input type="email" name="email" placeholder="Enter Email" required class="form-control">
+                <input type="email" name="email" placeholder="Enter Email"  class="form-control">
               </div>
               <div class="form-group">
                 <label for="username">  Voter ID<span class="text-danger"> *</span></label>
@@ -77,7 +77,7 @@
         <div class="card-content">
      <div class="card-body cleartfix">
              
-           <input type="number" name="s_position" placeholder='position' required class="form-control" value="Secretary" hidden>
+           <input type="hidden" name="s_position"  required  value="Secretary" >
               <div class="form-group">
                 <label for="username">Full name <span class="text-danger"> *</span></label>
                 <input type="text" name="s_name" placeholder="Enter Name" required class="form-control">
@@ -85,9 +85,9 @@
                <div class="form-group">
                 <label for="username">Sex<span class="text-danger"> *</span></label>
                 <select class="form-control form-select" name="s_gender">
-                    <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                  <option value="" disabled selected>Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
                 </select>
               </div>
                <div class="form-group">
@@ -96,7 +96,7 @@
               </div>
                <div class="form-group">
                 <label for="username">  Email(Optional)</label>
-                <input type="email" name="s_email" placeholder="Enter Email" required class="form-control">
+                <input type="email" name="s_email" placeholder="Enter Email" class="form-control">
               </div>
               <div class="form-group">
                 <label for="username">  Voter ID<span class="text-danger"> *</span></label>
@@ -122,7 +122,7 @@
         <div class="card-content">
      <div class="card-body cleartfix">
              
-           <input type="number" name="o_position" placeholder='position' required class="form-control" value="Organizer" hidden>
+           <input type="hidden" name="o_position"  required value="Organizer" >
               <div class="form-group">
                 <label for="username">Full name <span class="text-danger"> *</span></label>
                 <input type="text" name="o_name" placeholder="Enter Name" required class="form-control">
@@ -130,9 +130,9 @@
                <div class="form-group">
                 <label for="username">Sex<span class="text-danger"> *</span></label>
                 <select class="form-control form-select" name="o_gender">
-                    <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                  <option value="" disabled selected>Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
                 </select>
               </div>
                <div class="form-group">
@@ -141,7 +141,7 @@
               </div>
                <div class="form-group">
                 <label for="username">  Email(Optional)</label>
-                <input type="email" name="o_email" placeholder="Enter Email" required class="form-control">
+                <input type="email" name="o_email" placeholder="Enter Email"  class="form-control">
               </div>
               <div class="form-group">
                 <label for="username">  Voter ID<span class="text-danger"> *</span></label>
@@ -166,7 +166,7 @@
         <div class="card-content">
          <div class="card-body cleartfix">
              
-           <input type="number" name="w_position" placeholder='position' required class="form-control" value="women Organizer" hidden>
+           <input type="hidden" name="w_position"  value="Women's Organizer" required>
               <div class="form-group">
                 <label for="username">Full name <span class="text-danger"> *</span></label>
                 <input type="text" name="w_name" placeholder="Enter Name" required class="form-control">
@@ -174,9 +174,9 @@
                <div class="form-group">
                 <label for="username">Sex<span class="text-danger"> *</span></label>
                 <select class="form-control form-select" name="w_gender">
-                    <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                  <option value="" disabled selected>Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
                 </select>
               </div>
                <div class="form-group">
@@ -185,7 +185,7 @@
               </div>
                <div class="form-group">
                 <label for="username">  Email(Optional)</label>
-                <input type="email" name="w_email" placeholder="Enter Email" required class="form-control">
+                <input type="email" name="w_email" placeholder="Enter Email"  class="form-control">
               </div>
               <div class="form-group">
                 <label for="username">  Voter ID<span class="text-danger"> *</span></label>
@@ -210,7 +210,7 @@
         <div class="card-content">
      <div class="card-body cleartfix">
              
-           <input type="number" name="y_position" placeholder='position' required class="form-control" value="Youth Organizer" hidden>
+           <input type="hidden" name="y_position"  value="Youth Organizer"  required>
               <div class="form-group">
                 <label for="username">Full name <span class="text-danger"> *</span></label>
                 <input type="text" name="y_name" placeholder="Enter Name" required class="form-control">
@@ -218,9 +218,9 @@
                <div class="form-group">
                 <label for="username">Sex<span class="text-danger"> *</span></label>
                 <select class="form-control form-select" name="y_gender">
-                    <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                  <option value="" disabled selected>Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
                 </select>
               </div>
                <div class="form-group">
@@ -229,7 +229,7 @@
               </div>
                <div class="form-group">
                 <label for="username">  Email(Optional)</label>
-                <input type="email" name="y_email" placeholder="Enter Email" required class="form-control">
+                <input type="email" name="y_email" placeholder="Enter Email"  class="form-control">
               </div>
               <div class="form-group">
                 <label for="username">  Voter ID<span class="text-danger"> *</span></label>
@@ -249,10 +249,10 @@
   </div>
   <div class="row col-md-12 justify-content-center">
   <div class=" col-md-2">
-  <a class="btn subscribe  btn-block rounded-pill shadow-sm btn-outline-danger" href="{{route('home')}}"> Cancle </a>
+  <a class="btn subscribe  btn-block rounded-pill shadow-sm btn-outline-danger" href="{{route('home')}}"> Cancel </a>
 </div>
  <div class="col-md-2">
-  <button type="submit" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"> Confirm  </button>
+  <button type="submit" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"> Save  </button>
 </div>
 </div>
 </form>
