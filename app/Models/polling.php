@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class polling extends Model
 {
     use HasFactory;
-    use HasApiTokens, HasFactory, Notifiable;
 
 
     /**
@@ -19,7 +19,14 @@ class polling extends Model
     protected $fillable = [
         
     ];
+       public function Code(){
+        return $this->belongsTo(polling::class);
+    }
 
-    protected $table ='polling_station';    /**
+
+    protected $table ='polling_station';    
+         public function polling_station($id){
+    }
+
 
 }

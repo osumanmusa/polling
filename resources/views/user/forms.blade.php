@@ -16,8 +16,11 @@
 
 <div class="grey-bg container-fluid ">
   <section id="minimal-statistics">
-   
-<form>
+
+   <p>{{$data->ps_code}}</p>
+   <p>{{$data->polling_station_name}}</p>
+<form action="{{route('form.store')}}" method="POST" enctype="multipart/form-data">
+    @csrf
   <div class="row justify-content-center mt-5">
     <div class="col-xl-5 col-md-12">
       <div class="card">
@@ -26,16 +29,18 @@
 </svg> Chairman</h3></div>
         <div class="card-content">
            <div class="card-body cleartfix">
-             
+                <input type="number" name="ps_code" placeholder='{{$data->ps_code}}' required class="form-control" value="{{$data->ps_code}}" hidden>
+                <input type="number" name="position" placeholder='position' required class="form-control" value="Chairman" hidden>
+           
            
               <div class="form-group">
                 <label for="username">Full name <span class="text-danger"> *</span></label>
-                <input type="text" name="username" placeholder="Enter Name" required class="form-control">
+                <input type="text" name="name" placeholder="Enter Name" required class="form-control">
               </div>
                <div class="form-group">
                 <label for="username">Sex<span class="text-danger"> *</span></label>
-                <select class="form-control form-select">
-                    <option>Select Gender</option>
+                <select class="form-control form-select" name="gender">
+                    <option value="">Select Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
@@ -51,6 +56,10 @@
               <div class="form-group">
                 <label for="username">  Voter ID<span class="text-danger"> *</span></label>
                 <input type="text" name="voter_id" placeholder="Enter voters id" required class="form-control">
+              </div>
+               <div class="form-group">
+                <label for="username">  Picture<span class="text-danger"> *</span></label>
+                <input type="file" name="image" placeholder="" required class="form-control form-">
               </div>
 
           </div>
@@ -68,15 +77,15 @@
         <div class="card-content">
      <div class="card-body cleartfix">
              
-           
+           <input type="number" name="s_position" placeholder='position' required class="form-control" value="Secretary" hidden>
               <div class="form-group">
                 <label for="username">Full name <span class="text-danger"> *</span></label>
-                <input type="text" name="s_username" placeholder="Enter Name" required class="form-control">
+                <input type="text" name="s_name" placeholder="Enter Name" required class="form-control">
               </div>
                <div class="form-group">
                 <label for="username">Sex<span class="text-danger"> *</span></label>
                 <select class="form-control form-select" name="s_gender">
-                    <option>Select Gender</option>
+                    <option value="">Select Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
@@ -92,6 +101,10 @@
               <div class="form-group">
                 <label for="username">  Voter ID<span class="text-danger"> *</span></label>
                 <input type="text" name="s_voter_id" placeholder="Enter voters id" required class="form-control">
+              </div>
+               <div class="form-group">
+                <label for="username">  Picture<span class="text-danger"> *</span></label>
+                <input type="file" name="s_image" placeholder="" required class="form-control form-">
               </div>
 
           </div>
@@ -109,15 +122,15 @@
         <div class="card-content">
      <div class="card-body cleartfix">
              
-           
+           <input type="number" name="o_position" placeholder='position' required class="form-control" value="Organizer" hidden>
               <div class="form-group">
                 <label for="username">Full name <span class="text-danger"> *</span></label>
-                <input type="text" name="o_username" placeholder="Enter Name" required class="form-control">
+                <input type="text" name="o_name" placeholder="Enter Name" required class="form-control">
               </div>
                <div class="form-group">
                 <label for="username">Sex<span class="text-danger"> *</span></label>
                 <select class="form-control form-select" name="o_gender">
-                    <option>Select Gender</option>
+                    <option value="">Select Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
@@ -134,6 +147,10 @@
                 <label for="username">  Voter ID<span class="text-danger"> *</span></label>
                 <input type="text" name="o_voter_id" placeholder="Enter voters id" required class="form-control">
               </div>
+               <div class="form-group">
+                <label for="username">  Picture<span class="text-danger"> *</span></label>
+                <input type="file" name="o_image" placeholder="" required class="form-control form-">
+              </div>
 
           </div>
         </div>
@@ -149,15 +166,15 @@
         <div class="card-content">
          <div class="card-body cleartfix">
              
-           
+           <input type="number" name="w_position" placeholder='position' required class="form-control" value="women Organizer" hidden>
               <div class="form-group">
                 <label for="username">Full name <span class="text-danger"> *</span></label>
-                <input type="text" name="w_username" placeholder="Enter Name" required class="form-control">
+                <input type="text" name="w_name" placeholder="Enter Name" required class="form-control">
               </div>
                <div class="form-group">
                 <label for="username">Sex<span class="text-danger"> *</span></label>
                 <select class="form-control form-select" name="w_gender">
-                    <option>Select Gender</option>
+                    <option value="">Select Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
@@ -174,6 +191,10 @@
                 <label for="username">  Voter ID<span class="text-danger"> *</span></label>
                 <input type="text" name="w_voter_id" placeholder="Enter voters id" required class="form-control">
               </div>
+               <div class="form-group">
+                <label for="username">  Picture<span class="text-danger"> *</span></label>
+                <input type="file" name="w_image" placeholder="" required class="form-control form-">
+              </div>
 
           </div>
         </div>
@@ -189,15 +210,15 @@
         <div class="card-content">
      <div class="card-body cleartfix">
              
-           
+           <input type="number" name="y_position" placeholder='position' required class="form-control" value="Youth Organizer" hidden>
               <div class="form-group">
                 <label for="username">Full name <span class="text-danger"> *</span></label>
-                <input type="text" name="y_username" placeholder="Enter Name" required class="form-control">
+                <input type="text" name="y_name" placeholder="Enter Name" required class="form-control">
               </div>
                <div class="form-group">
                 <label for="username">Sex<span class="text-danger"> *</span></label>
                 <select class="form-control form-select" name="y_gender">
-                    <option>Select Gender</option>
+                    <option value="">Select Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
@@ -214,6 +235,10 @@
                 <label for="username">  Voter ID<span class="text-danger"> *</span></label>
                 <input type="text" name="y_voter_id" placeholder="Enter voters id" required class="form-control">
               </div>
+               <div class="form-group">
+                <label for="username">  Picture<span class="text-danger"> *</span></label>
+                <input type="file" name="y_image" placeholder="" required class="form-control form-">
+              </div>
 
           </div>
         </div>
@@ -227,7 +252,7 @@
   <a class="btn subscribe  btn-block rounded-pill shadow-sm btn-outline-danger" href="{{route('home')}}"> Cancle </a>
 </div>
  <div class="col-md-2">
-  <button type="button" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"> Confirm  </button>
+  <button type="submit" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"> Confirm  </button>
 </div>
 </div>
 </form>

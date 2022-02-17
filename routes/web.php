@@ -23,3 +23,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/search',[App\Http\Controllers\HomeController::class, 'search'])->name('search');
 
 Route::get('/create/{id}',[App\Http\Controllers\FormController::class, 'create'])->name('form.create');
+Route::post('/store',[App\Http\Controllers\FormController::class, 'store'])->name('form.store');
