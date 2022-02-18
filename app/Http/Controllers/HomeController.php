@@ -30,7 +30,8 @@ class HomeController extends Controller
     }
      public function search(Request $request)
     {
-    $request->validate(['code'=>'required','query'=>'required']);
+    $request->validate(['code'=>'required',
+        'query'=>'required']);
     $data=""; 
 
      $code = $request->get('code');

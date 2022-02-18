@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 return [
 
@@ -145,6 +145,42 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'image.0'=>[
+            'required'=>'Chairman image is required',
+            'image' => 'The input has to be an image',
+            'mimes'=>'The image has to be of type jpg,png,jpeg,svg',
+            'max' =>'The max size of the image 2MB'
+        ],
+        'image.1'=>[
+            'required'=>'Secretary image is required',
+            'image' => 'The input has to be an image',
+            'mimes'=>'The image has to be of type jpg,png,jpeg,svg',
+            'max' =>'The max size of the image 2MB'
+        ],
+        'image.2'=>[
+            'required'=>'Organizer image is required',
+            'image' => 'The input has to be an image',
+            'mimes'=>'The image has to be of type jpg,png,jpeg,svg',
+            'max' =>'The max size of the image 2MB'
+        ],
+        'image.3'=>[
+            'required'=>"Women's Organizer image  is required",
+            'image' => 'The input has to be an image',
+            'mimes'=>'The image has to be of type jpg,png,jpeg,svg',
+            'max' =>'The max size of the image 2MB'
+        ],
+        'image.4'=>[
+            'required'=>'Youth Organizer image is required',
+            'image' => 'The input has to be an image',
+            'mimes'=>'The image has to be of type jpg,png,jpeg,svg',
+            'max' =>'The max size of the image 2MB'
+        ],
+        'code'=>[
+            'required'=>'The Search By field is required',     
+        ],
+        'query'=>[
+            'required'=>'The Search field is required',     
+        ]
     ],
 
     /*

@@ -129,15 +129,29 @@ body {
             <div class="card-body p-4">
                 <form action="{{route('search')}}" method="POST">
                     @csrf
-             <div class="search mb-4 "><select name="code" type="text" class="form-select input_height" placeholder="Have a question? Ask Now" > <option value="">Select By</option>
-
+             <div class="search mb-4 "><select name="code" type="text" class="form-select input_height" placeholder="Have a question? Ask Now" > 
+                <option value="" disabled selected>Select By</option>
                 <option value="ea_name">EA NAME</option>
                 <option value="ea_code">EA CODE</option>
                 <option value="ps_name">POLLING STATION NAME</option>
                 <option value="ps_code">POLLING STATION CODE</option>
         </select>
+                @if ($errors->has('code'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('code') }}</strong>
+            </span>
+        @endif
+
     </div>
-            <div class="search "> <input type="text" class="form-control input_height" name="query" placeholder="Search Here" required>  </div>
+            <div class="search ">
+             <input type="text" class="form-control input_height" name="query" placeholder="Search Here" >  
+     @if ($errors->has('query'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('query') }}</strong>
+            </span>
+        @endif
+
+            </div>
             <div class="d-flex  pull-right  mt-4  ">
             <button type="submit" class="btn btn-primary    "style="border-radius: 6px;"><i class="fa fa-search"></i> Search</button> 
         </div>

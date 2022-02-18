@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
 <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
@@ -8,12 +14,10 @@
 
 <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 <style type="text/css">
-.grey-bg {  
-    background-color: #F5F7FA;
-}
+
 
 </style>
-
+<body style=" background-image: linear-gradient(72deg,red 30%, #fff  10%, #1919a3 90%)!important;">
 <div class="grey-bg container-fluid ">
   <section id="minimal-statistics">
 
@@ -35,7 +39,13 @@
            
               <div class="form-group">
                 <label for="username">Full name <span class="text-danger"> *</span></label>
-                <input type="text" name="name" placeholder="Enter Name" required class="form-control">
+                <input type="text" name="name" placeholder="Enter Name"  class="form-control">
+                        @if ($errors->has('name'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('name') }}</strong>
+            </span>
+        @endif
+
               </div>
                <div class="form-group">
                 <label for="username">Sex<span class="text-danger"> *</span></label>
@@ -44,23 +54,44 @@
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
+                        @if ($errors->has('gender'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('gender') }}</strong>
+            </span>
+        @endif
+
               </div>
                <div class="form-group">
                 <label for="username">Phone<span class="text-danger"> *</span></label>
-                <input type="number" name="phone" placeholder="Enter Phone number" required class="form-control">
+                <input type="number" name="phone" placeholder="Enter Phone number"  class="form-control">
+                        @if ($errors->has('phone'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('phone') }}</strong>
+            </span>
+        @endif
+
               </div>
                <div class="form-group">
                 <label for="username">  Email(Optional)</label>
                 <input type="email" name="email" placeholder="Enter Email"  class="form-control">
+                        @if ($errors->has('email'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('email') }}</strong>
+            </span>
+        @endif
+
               </div>
               <div class="form-group">
                 <label for="username">  Voter ID<span class="text-danger"> *</span></label>
-                <input type="text" name="voter_id" placeholder="Enter voters id" required class="form-control">
+                <input type="text" name="voter_id" placeholder="Enter voters id"  class="form-control">
+                        @if ($errors->has('voter_id'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('voter_id') }}</strong>
+            </span>
+        @endif
+
               </div>
-               <div class="form-group">
-                <label for="username">  Picture<span class="text-danger"> *</span></label>
-                <input type="file" name="image" placeholder="" required class="form-control form-">
-              </div>
+             
 
           </div>
         </div>
@@ -80,7 +111,13 @@
            <input type="hidden" name="s_position"  required  value="Secretary" >
               <div class="form-group">
                 <label for="username">Full name <span class="text-danger"> *</span></label>
-                <input type="text" name="s_name" placeholder="Enter Name" required class="form-control">
+                <input type="text" name="s_name" placeholder="Enter Name"  class="form-control">
+                        @if ($errors->has('s_name'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('s_name') }}</strong>
+            </span>
+        @endif
+
               </div>
                <div class="form-group">
                 <label for="username">Sex<span class="text-danger"> *</span></label>
@@ -89,23 +126,44 @@
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
+                        @if ($errors->has('s_gender'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('s_gender') }}</strong>
+            </span>
+        @endif
+
               </div>
                <div class="form-group">
                 <label for="username">Phone<span class="text-danger"> *</span></label>
-                <input type="number" name="s_phone" placeholder="Enter Phone number" required class="form-control">
+                <input type="number" name="s_phone" placeholder="Enter Phone number"  class="form-control">
+                        @if ($errors->has('s_phone'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('s_phone') }}</strong>
+            </span>
+        @endif
+
               </div>
                <div class="form-group">
                 <label for="username">  Email(Optional)</label>
                 <input type="email" name="s_email" placeholder="Enter Email" class="form-control">
+                        @if ($errors->has('s_email'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('s_email') }}</strong>
+            </span>
+        @endif
+
               </div>
               <div class="form-group">
                 <label for="username">  Voter ID<span class="text-danger"> *</span></label>
-                <input type="text" name="s_voter_id" placeholder="Enter voters id" required class="form-control">
+                <input type="text" name="s_voter_id" placeholder="Enter voters id"  class="form-control">
+                        @if ($errors->has('s_voter_id'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('s_voter_id') }}</strong>
+            </span>
+        @endif
+
               </div>
-               <div class="form-group">
-                <label for="username">  Picture<span class="text-danger"> *</span></label>
-                <input type="file" name="s_image" placeholder="" required class="form-control form-">
-              </div>
+             
 
           </div>
         </div>
@@ -125,7 +183,13 @@
            <input type="hidden" name="o_position"  required value="Organizer" >
               <div class="form-group">
                 <label for="username">Full name <span class="text-danger"> *</span></label>
-                <input type="text" name="o_name" placeholder="Enter Name" required class="form-control">
+                <input type="text" name="o_name" placeholder="Enter Name"  class="form-control">
+                        @if ($errors->has('o_name'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('o_name') }}</strong>
+            </span>
+        @endif
+
               </div>
                <div class="form-group">
                 <label for="username">Sex<span class="text-danger"> *</span></label>
@@ -134,23 +198,44 @@
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
+                        @if ($errors->has('o_gender'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('o_gender') }}</strong>
+            </span>
+        @endif
+
               </div>
                <div class="form-group">
                 <label for="username">Phone<span class="text-danger"> *</span></label>
-                <input type="number" name="o_phone" placeholder="Enter Phone number" required class="form-control">
+                <input type="number" name="o_phone" placeholder="Enter Phone number"  class="form-control">
+                        @if ($errors->has('o_phone'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('o_phone') }}</strong>
+            </span>
+        @endif
+
               </div>
                <div class="form-group">
                 <label for="username">  Email(Optional)</label>
                 <input type="email" name="o_email" placeholder="Enter Email"  class="form-control">
+                        @if ($errors->has('o_email'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('o_email') }}</strong>
+            </span>
+        @endif
+
               </div>
               <div class="form-group">
                 <label for="username">  Voter ID<span class="text-danger"> *</span></label>
-                <input type="text" name="o_voter_id" placeholder="Enter voters id" required class="form-control">
+                <input type="text" name="o_voter_id" placeholder="Enter voters id"  class="form-control">
+                        @if ($errors->has('o_voter_id'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('o_voter_id') }}</strong>
+            </span>
+        @endif
+
               </div>
-               <div class="form-group">
-                <label for="username">  Picture<span class="text-danger"> *</span></label>
-                <input type="file" name="o_image" placeholder="" required class="form-control form-">
-              </div>
+           
 
           </div>
         </div>
@@ -169,7 +254,13 @@
            <input type="hidden" name="w_position"  value="Women's Organizer" required>
               <div class="form-group">
                 <label for="username">Full name <span class="text-danger"> *</span></label>
-                <input type="text" name="w_name" placeholder="Enter Name" required class="form-control">
+                <input type="text" name="w_name" placeholder="Enter Name"  class="form-control">
+                        @if ($errors->has('w_name'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('w_name') }}</strong>
+            </span>
+        @endif
+
               </div>
                <div class="form-group">
                 <label for="username">Sex<span class="text-danger"> *</span></label>
@@ -178,23 +269,44 @@
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
+                        @if ($errors->has('w_gender'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('w_gender') }}</strong>
+            </span>
+        @endif
+
               </div>
                <div class="form-group">
                 <label for="username">Phone<span class="text-danger"> *</span></label>
-                <input type="number" name="w_phone" placeholder="Enter Phone number" required class="form-control">
+                <input type="number" name="w_phone" placeholder="Enter Phone number"  class="form-control">
+                        @if ($errors->has('w_phone'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('w_phone') }}</strong>
+            </span>
+        @endif
+
               </div>
                <div class="form-group">
                 <label for="username">  Email(Optional)</label>
                 <input type="email" name="w_email" placeholder="Enter Email"  class="form-control">
+                        @if ($errors->has('w_email'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('w_email') }}</strong>
+            </span>
+        @endif
+
               </div>
               <div class="form-group">
                 <label for="username">  Voter ID<span class="text-danger"> *</span></label>
-                <input type="text" name="w_voter_id" placeholder="Enter voters id" required class="form-control">
+                <input type="text" name="w_voter_id" placeholder="Enter voters id"  class="form-control">
+                        @if ($errors->has('w_voter_id'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('w_voter_id') }}</strong>
+            </span>
+        @endif
+
               </div>
-               <div class="form-group">
-                <label for="username">  Picture<span class="text-danger"> *</span></label>
-                <input type="file" name="w_image" placeholder="" required class="form-control form-">
-              </div>
+              
 
           </div>
         </div>
@@ -210,10 +322,16 @@
         <div class="card-content">
      <div class="card-body cleartfix">
              
-           <input type="hidden" name="y_position"  value="Youth Organizer"  required>
+           <input type="hidden" name="y_position"  value="Youth Organizer"  >
               <div class="form-group">
                 <label for="username">Full name <span class="text-danger"> *</span></label>
-                <input type="text" name="y_name" placeholder="Enter Name" required class="form-control">
+                <input type="text" name="y_name" placeholder="Enter Name"  class="form-control">
+                        @if ($errors->has('y_name'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('y_name') }}</strong>
+            </span>
+        @endif
+
               </div>
                <div class="form-group">
                 <label for="username">Sex<span class="text-danger"> *</span></label>
@@ -222,29 +340,72 @@
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
+                        @if ($errors->has('y_gender'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('y_gender') }}</strong>
+            </span>
+        @endif
+
               </div>
                <div class="form-group">
                 <label for="username">Phone<span class="text-danger"> *</span></label>
-                <input type="number" name="y_phone" placeholder="Enter Phone number" required class="form-control">
+                <input type="number" name="y_phone" placeholder="Enter Phone number"  class="form-control">
+                        @if ($errors->has('y_phone'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('y_phone') }}</strong>
+            </span>
+        @endif
+
               </div>
                <div class="form-group">
                 <label for="username">  Email(Optional)</label>
                 <input type="email" name="y_email" placeholder="Enter Email"  class="form-control">
+                        @if ($errors->has('y_email'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('y_email') }}</strong>
+            </span>
+        @endif
+
               </div>
               <div class="form-group">
                 <label for="username">  Voter ID<span class="text-danger"> *</span></label>
-                <input type="text" name="y_voter_id" placeholder="Enter voters id" required class="form-control">
+                <input type="text" name="y_voter_id" placeholder="Enter voters id"  class="form-control">
+                        @if ($errors->has('y_voter_id'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('y_voter_id') }}</strong>
+            </span>
+        @endif
+
               </div>
+            
+
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="col-xl-5 col-md-12">
+      <div class="card">
+        <div class="card-header"><h3><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-union" viewBox="0 0 16 16">
+        <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2z"/>
+      </svg> Group Image</h3></div>
+        <div class="card-content">
+        <div class="card-body cleartfix">
+             
                <div class="form-group">
                 <label for="username">  Picture<span class="text-danger"> *</span></label>
-                <input type="file" name="y_image" placeholder="" required class="form-control form-">
+                <input type="file" name="g_image" placeholder=""  class="form-control form-">
+                        @if ($errors->has('g_image'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('g_image') }}</strong>
+            </span>
+        @endif
+
               </div>
 
           </div>
         </div>
       </div>
     </div>
-  
 
   </div>
   <div class="row col-md-12 justify-content-center">
@@ -258,3 +419,6 @@
 </form>
 </section>
 </div>
+
+</body>
+</html>

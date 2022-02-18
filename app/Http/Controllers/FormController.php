@@ -7,6 +7,7 @@ use App\Models\polling;
 use App\Models\Code;
 use Illuminate\Support\Facades\DB;
 use App\Models\Data;
+use App\Models\grouppicture;
 use App\Http\Requests\DataRequest;
 
 class FormController extends Controller
@@ -24,6 +25,10 @@ class FormController extends Controller
      */
     public function index()
     {
+         $pollers=Data::latest()->paginate(10);
+      $pollerscount = Data::all()->count();
+
+        return view('user.message')->with('pollers',$pollers)->with('pollerscount',$pollerscount);
     }
 
     /**
@@ -46,27 +51,10 @@ class FormController extends Controller
      */
     public function store(DataRequest $request)
     {
-
-
-        //Chairman Image
-        $c_image = time() . '-' . $request->file('image')->getClientOriginalName() . '.' . $request->file('image')->extension();
-        $request->file('image')->move(public_path('assets/images/profiles/chairman'), $c_image);
-
-        //Secretary Image
-        $s_image = time() . '-' . $request->file('image')->getClientOriginalName() . '.' . $request->file('image')->extension();
-        $request->file('image')->move(public_path('assets/images/profiles/secretary'), $s_image);
-
-        //Organizer Image
-        $o_image = time() . '-' . $request->file('image')->getClientOriginalName() . '.' . $request->file('image')->extension();
-        $request->file('image')->move(public_path('assets/images/profiles/chairman'), $o_image);
-
-        //Women's Organizer  Image
-        $w_image = time() . '-' . $request->file('image')->getClientOriginalName() . '.' . $request->file('image')->extension();
-        $request->file('image')->move(public_path('assets/images/profiles/chairman'), $w_image);
-
-        //Youth Organizer Image    
-        $y_image = time() . '-' . $request->file('image')->getClientOriginalName() . '.' . $request->file('image')->extension();
-        $request->file('image')->move(public_path('assets/images/profiles/chairman'), $y_image);
+   //  dd($request);
+     
+        $g_image = time() . '-' . $request->file('g_image')->getClientOriginalName() . '.' . $request->file('g_image')->extension();
+        $request->file('g_image')->move(public_path('assets/images/profiles/'), $g_image);
 
 
         $poller = new Data();
@@ -77,7 +65,6 @@ class FormController extends Controller
         $poller->phone = $request->phone;
         $poller->email = $request->email;
         $poller->voter_id = $request->voter_id;
-        $poller->pic = $c_image;
 
 
         $s_poller = new Data();
@@ -88,7 +75,6 @@ class FormController extends Controller
         $s_poller->phone = $request->s_phone;
         $s_poller->email = $request->s_email;
         $s_poller->voter_id = $request->s_voter_id;
-        $s_poller->pic = $s_image;
 
         //Organizer Data
         $o_poller = new Data();
@@ -99,7 +85,6 @@ class FormController extends Controller
         $o_poller->phone = $request->o_phone;
         $o_poller->email = $request->o_email;
         $o_poller->voter_id = $request->o_voter_id;
-        $o_poller->pic = $o_image;
 
         //Women's Organizer
         $w_poller = new Data();
@@ -110,7 +95,6 @@ class FormController extends Controller
         $w_poller->phone = $request->w_phone;
         $w_poller->email = $request->w_email;
         $w_poller->voter_id = $request->w_voter_id;
-        $w_poller->pic = $w_image;
 
         //Youth Organizer
         $y_poller = new Data();
@@ -121,8 +105,11 @@ class FormController extends Controller
         $y_poller->phone = $request->y_phone;
         $y_poller->email = $request->y_email;
         $y_poller->voter_id = $request->y_voter_id;
-        $y_poller->pic = $y_image;
-
+        
+        $group = new grouppicture();
+        $group->ps_id= $request->ps_code;
+        $group->picture= $request->g_image;
+        
 
         // dd($poller);
         $poller->save();
@@ -130,8 +117,10 @@ class FormController extends Controller
         $s_poller->save();
         $y_poller->save();
         $o_poller->save();
+        $group->save();
 
-        return view('user.message', compact('c_image'));
+        return redirect()->route('form.index');
+     
     }
 
     /**
@@ -142,7 +131,7 @@ class FormController extends Controller
      */
     public function show($id)
     {
-        //
+     
     }
 
     /**
@@ -163,10 +152,79 @@ class FormController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'image.0' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048',
+            'image.1' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048',
+            'image.2' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048',
+            'image.3' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048',
+            'image.4' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048'
+        ]);
+
+        $data = $request->post();
+        $ps_code= $request->ps_code;
+       //dd($code);
+        
+
+        $images = $request->file('image');
+        $positions = $data['position'];
+
+         for ($i=0; $i<count($images); $i++) {
+        
+        
+            $image = time() . '-' . $images[$i]->getClientOriginalName() . '.' . $images[$i]->extension()  ; 
+            $images[$i]->move(public_path('assets/images/profiles/'), $image);
+
+       
+              $position = strtolower($positions[$i]);
+       
+            $pos ='';
+              switch ($position) {
+                    case 'chairman':
+                   $pos = 'Chairman';
+                   DB::update('update Data set pic = ? where ps_code = ? and position = ?',[$image , $ps_code,$pos]);      
+                        
+                        break;
+
+                    case 'secretary':
+                    $pos = 'Secretary';
+                     DB::update('update Data set pic = ? where ps_code = ? and position = ?',[$image , $ps_code , $pos]); 
+                    
+
+                        break;
+                    case 'organizer':
+                    $pos = 'Organizer';
+                    DB::update('update Data set pic = ? where ps_code = ? and position = ?',[$image , $ps_code,$pos]);
+                     
+                     
+                        break;
+                    case "women's organizer":
+                    $pos = "Women's Organizer";
+                     DB::update("update Data set pic = ? where ps_code = ? and position = ?",[$image , $ps_code,$pos]);
+                     
+                        break;
+                    case 'youth organizer':
+                    $pos ='Youth Organizer';
+                     DB::update('update Data set pic = ? where ps_code = ? and position = ?',[$image , $ps_code,$pos]);
+                    
+                        break;
+        }
+
+        }
+
+      
+   
+
+        return redirect()->route('form.index');
     }
+       public function updateform($id)
+    {
+
+     
+           return view('user.insert',compact('id'));
+    }
+
 
     /**
      * Remove the specified resource from storage.
