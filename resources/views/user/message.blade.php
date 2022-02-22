@@ -118,8 +118,7 @@
       
 
        <!--start content-->
-       <main class="col-md-12 p-5">
-        
+       
                 <!--end breadcrumb-->
                 <h6 class="mb-0 text-uppercase">DataTable Example</h6>
                 <hr/>
@@ -140,7 +139,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                  <main class="col-md-12 p-5">
+          <div class="d-flex justify-content-end mb-4">
+            <a class="btn btn-primary" href="/data/pdf">Export to PDF</a>
+        </div>
+        <div class="d-flex justify-content-end mb-4">
+            <a class="btn btn-primary" href="/data/excel">Export to excel</a>
+        </div>
                                     @foreach($pollers as $pollers)
+
                                     <tr>
                                         <td>{{$pollers->ps_code}}</td>
                                         <td>{{$pollers->name}}</td>

@@ -25,3 +25,7 @@ Route::get('/store',[App\Http\Controllers\FormController::class, 'index'])->name
 
 Route::get('/update/{id}',[App\Http\Controllers\FormController::class, 'updateform'])->name('form.insert');
 Route::post('/picupdated',[App\Http\Controllers\FormController::class, 'update'])->name('form.update');
+
+
+Route::get('/data/pdf', [App\Http\Controllers\FormController::class, 'createPDF'])->name('generate.PDF');
+Route::get('/data/excel', [App\Http\Controllers\FormController::class, 'createcsv'])->name('generate.excel');

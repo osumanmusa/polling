@@ -61,6 +61,18 @@
         @endif
 
               </div>
+<!--Date of Birth -->
+<div class="form-group">
+                <label for="username">Date Of Birth <span class="text-danger"> *</span></label>
+                <input type="date" name="dob" placeholder="Date of Birth"  class="form-control">
+                        @if ($errors->has('dob'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('dob') }}</strong>
+            </span>
+        @endif
+
+              </div>
+
                <div class="form-group">
                 <label for="username">Phone<span class="text-danger"> *</span></label>
                 <input type="number" name="phone" placeholder="Enter Phone number"  class="form-control">
@@ -91,6 +103,17 @@
         @endif
 
               </div>
+
+<div class="form-group">
+                <label for="username">  Picture<span class="text-danger"> *</span></label>
+                <input type="file" name="image[]" placeholder=""  class="form-control form-">
+                    @if ($errors->has('image.0'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('image.0') }}</strong>
+            </span>
+        @endif
+              </div>
+
              
 
           </div>
@@ -133,6 +156,21 @@
         @endif
 
               </div>
+
+
+              <!--Date of Birth -->
+<div class="form-group">
+                <label for="username">Date Of Birth <span class="text-danger"> *</span></label>
+                <input type="date" name="s_dob" placeholder="Date of Birth"  class="form-control">
+                        @if ($errors->has('s_dob'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('s_dob') }}</strong>
+            </span>
+        @endif
+
+              </div>
+
+
                <div class="form-group">
                 <label for="username">Phone<span class="text-danger"> *</span></label>
                 <input type="number" name="s_phone" placeholder="Enter Phone number"  class="form-control">
@@ -164,6 +202,16 @@
 
               </div>
              
+<div class="form-group">
+                <label for="username">  Picture<span class="text-danger"> *</span></label>
+                <input type="file" name="image[]" placeholder=""  class="form-control form-">
+                    @if ($errors->has('image.1'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('image.1') }}</strong>
+            </span>
+        @endif
+              </div>
+
 
           </div>
         </div>
@@ -192,7 +240,7 @@
 
               </div>
                <div class="form-group">
-                <label for="username">Sex<span class="text-danger"> *</span></label>
+                <label for="o_gender">Sex<span class="text-danger"> *</span></label>
                 <select class="form-control form-select" name="o_gender">
                   <option value="" disabled selected>Select Gender</option>
                   <option value="Male">Male</option>
@@ -205,6 +253,23 @@
         @endif
 
               </div>
+
+
+
+
+<!--Date of Birth -->
+<div class="form-group">
+                <label for="o_dob">Date Of Birth <span class="text-danger"> *</span></label>
+                <input type="date" name="o_dob" placeholder="Date of Birth"  class="form-control">
+                        @if ($errors->has('o_dob'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('o_dob') }}</strong>
+            </span>
+        @endif
+
+              </div>
+
+
                <div class="form-group">
                 <label for="username">Phone<span class="text-danger"> *</span></label>
                 <input type="number" name="o_phone" placeholder="Enter Phone number"  class="form-control">
@@ -236,6 +301,18 @@
 
               </div>
            
+
+<div class="form-group">
+                <label for="username">  Picture<span class="text-danger"> *</span></label>
+                <input type="file" name="image[]" placeholder=""  class="form-control form-">
+                     @if ($errors->has('image.2'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('image.2') }}</strong>
+            </span>
+        @endif
+              </div>
+
+
 
           </div>
         </div>
@@ -276,6 +353,19 @@
         @endif
 
               </div>
+
+<!--Date of Birth -->
+<div class="form-group">
+                <label for="w_dob">Date Of Birth <span class="text-danger"> *</span></label>
+                <input type="date" name="w_dob" placeholder="Date of Birth"  class="form-control">
+                        @if ($errors->has('w_dob'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('w_dob') }}</strong>
+            </span>
+        @endif
+
+              </div>
+
                <div class="form-group">
                 <label for="username">Phone<span class="text-danger"> *</span></label>
                 <input type="number" name="w_phone" placeholder="Enter Phone number"  class="form-control">
@@ -307,6 +397,16 @@
 
               </div>
               
+<div class="form-group">
+                <label for="username">  Picture<span class="text-danger"> *</span></label>
+                <input type="file" name="image[]" placeholder=""  class="form-control form-">
+                     @if ($errors->has('image.3'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('image.3') }}</strong>
+            </span>
+        @endif
+              </div>
+
 
           </div>
         </div>
@@ -347,6 +447,19 @@
         @endif
 
               </div>
+
+<!--Date of Birth -->
+<div class="form-group">
+                <label for="y_dob">Date Of Birth <span class="text-danger"> *</span></label>
+                <input type="date" name="y_dob" placeholder="Date of Birth"  class="form-control">
+                        @if ($errors->has('y_dob'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('y_dob') }}</strong>
+            </span>
+        @endif
+
+              </div>
+
                <div class="form-group">
                 <label for="username">Phone<span class="text-danger"> *</span></label>
                 <input type="number" name="y_phone" placeholder="Enter Phone number"  class="form-control">
@@ -377,7 +490,16 @@
         @endif
 
               </div>
-            
+            <div class="form-group">
+                <label for="username">  Picture<span class="text-danger"> *</span></label>
+                <input type="file" name="image[]" placeholder=""  class="form-control form-">
+                    @if ($errors->has('image.4'))
+            <span class="text-danger">
+                <strong>{{ $errors->first('image.4') }}</strong>
+            </span>
+        @endif
+              </div>
+
 
           </div>
         </div>

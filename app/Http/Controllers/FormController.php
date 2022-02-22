@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Data;
 use App\Models\grouppicture;
 use App\Http\Requests\DataRequest;
+use PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UsersExport;
 
 class FormController extends Controller
 {
@@ -30,6 +33,7 @@ class FormController extends Controller
 
         return view('user.message')->with('pollers',$pollers)->with('pollerscount',$pollerscount);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -56,7 +60,27 @@ class FormController extends Controller
         $g_image = time() . '-' . $request->file('g_image')->getClientOriginalName() . '.' . $request->file('g_image')->extension();
         $request->file('g_image')->move(public_path('assets/images/profiles/'), $g_image);
 
+        
+        $images = $request->file('image');
 
+        $c_image = time() . '-' . $images[0]->getClientOriginalName() . '.' . $images[0]->extension()  ; 
+        $images[0]->move(public_path('assets/images/profiles/'), $c_image);
+
+        $s_image = time() . '-' . $images[1]->getClientOriginalName() . '.' . $images[1]->extension()  ; 
+        $images[1]->move(public_path('assets/images/profiles/'), $s_image);
+
+        $o_image = time() . '-' . $images[2]->getClientOriginalName() . '.' . $images[2]->extension()  ; 
+        $images[2]->move(public_path('assets/images/profiles/'), $o_image);
+
+        $w_image = time() . '-' . $images[3]->getClientOriginalName() . '.' . $images[3]->extension()  ; 
+        $images[3]->move(public_path('assets/images/profiles/'), $w_image);
+          
+        $y_image = time() . '-' . $images[4]->getClientOriginalName() . '.' . $images[4]->extension()  ; 
+        $images[4]->move(public_path('assets/images/profiles/'), $y_image);    
+
+
+
+      //Chairman 
         $poller = new Data();
         $poller->name = $request->name;
         $poller->position = $request->position;
@@ -65,7 +89,10 @@ class FormController extends Controller
         $poller->phone = $request->phone;
         $poller->email = $request->email;
         $poller->voter_id = $request->voter_id;
+        $poller->pic = $c_image;
+        $poller->dob = $request->dob;
 
+      //Secretary
 
         $s_poller = new Data();
         $s_poller->name = $request->s_name;
@@ -75,8 +102,9 @@ class FormController extends Controller
         $s_poller->phone = $request->s_phone;
         $s_poller->email = $request->s_email;
         $s_poller->voter_id = $request->s_voter_id;
-
-        //Organizer Data
+        $s_poller->pic = $s_image;
+        $s_poller->dob = $request->s_dob;
+    //Organizer Data
         $o_poller = new Data();
         $o_poller->name = $request->o_name;
         $o_poller->position = $request->o_position;
@@ -85,6 +113,8 @@ class FormController extends Controller
         $o_poller->phone = $request->o_phone;
         $o_poller->email = $request->o_email;
         $o_poller->voter_id = $request->o_voter_id;
+        $o_poller->pic = $o_image;
+        $o_poller->dob = $request->o_dob;
 
         //Women's Organizer
         $w_poller = new Data();
@@ -95,6 +125,8 @@ class FormController extends Controller
         $w_poller->phone = $request->w_phone;
         $w_poller->email = $request->w_email;
         $w_poller->voter_id = $request->w_voter_id;
+        $w_poller->pic= $w_image;
+        $w_poller->dob = $request->w_dob;
 
         //Youth Organizer
         $y_poller = new Data();
@@ -105,13 +137,16 @@ class FormController extends Controller
         $y_poller->phone = $request->y_phone;
         $y_poller->email = $request->y_email;
         $y_poller->voter_id = $request->y_voter_id;
-        
+        $y_poller->pic = $y_image;
+        $y_poller->dob = $request->y_dob;
+
+        //Group image
         $group = new grouppicture();
         $group->ps_id= $request->ps_code;
-        $group->picture= $request->g_image;
+        $group->picture= $g_image;
         
 
-        // dd($poller);
+        //Save the data in database
         $poller->save();
         $w_poller->save();
         $s_poller->save();
@@ -123,27 +158,31 @@ class FormController extends Controller
      
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-     
+//Function to convert from html to  PDF 
+  public function createPDF() {
+      // retreive all records from db
+     // $data = Data::where('ps_code' , $ps_code)->get();
+       $pollers = Data::all();
+      
+      // share data to view
+      view()->share('user.message',$pollers);
+     $pdf = PDF::loadView('user.trial', compact('pollers'));
+    // dd($pdf);
+      // download PDF file with download method
+     return $pdf->stream('user.trial', array('Attachment'=>false));
+      //return $pdf->download('trial.pdf');
+
+    }
+//Function to convert from html to  PDF 
+  public function createcsv() {
+      // retreive all records from db
+     // $data = Data::where('ps_code' , $ps_code)->get();
+return Excel::download(new UsersExport, 'trial.xlsx');
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+
+
 
     /**
      * Update the specified resource in storage.
