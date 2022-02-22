@@ -26,12 +26,16 @@ class FormController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($ps_code)
     {
-         $pollers=Data::latest()->paginate(10);
-      $pollerscount = Data::all()->count();
 
-        return view('user.message')->with('pollers',$pollers)->with('pollerscount',$pollerscount);
+
+         $pollers=Data::where('ps_code',$ps_code)->get();
+       
+      // $pollers =Data::all();
+       
+
+        return view('user.message')->with('pollers',$pollers)->with('ps_code',$ps_code);
     }
 
 
@@ -42,6 +46,13 @@ class FormController extends Controller
      */
     public function create($ps_code)
     {
+        $check = Data::where('ps_code',$ps_code)->get();
+
+        if(count($check) >0 ){
+            return redirect()->route('form.index',$ps_code);
+        }
+        
+
         $data = DB::table('polling_station')
             ->select('polling_station.*')->where('ps_code', '=', $ps_code)->first();
         return view('user.forms')->with('data', $data);
@@ -154,29 +165,34 @@ class FormController extends Controller
         $o_poller->save();
         $group->save();
 
-        return redirect()->route('form.index');
+        return redirect()->route('form.index',$request->ps_code);
      
     }
 
 //Function to convert from html to  PDF 
-  public function createPDF() {
-      // retreive all records from db
-     // $data = Data::where('ps_code' , $ps_code)->get();
-       $pollers = Data::all();
+  public function createPDF($ps_code) {
       
+      // retreive all records from db   
+         $pollers = Data::where('ps_code',$ps_code)->get();
+  
+    //return view('user.trial',compact('pollers'));
+
       // share data to view
-      view()->share('user.message',$pollers);
+    // view()->share('user.message',$pollers);
+     
      $pdf = PDF::loadView('user.trial', compact('pollers'));
+
     // dd($pdf);
       // download PDF file with download method
      return $pdf->stream('user.trial', array('Attachment'=>false));
       //return $pdf->download('trial.pdf');
 
+
     }
-//Function to convert from html to  PDF 
-  public function createcsv() {
+//Function to convert from html to  excel 
+  public function createcsv($ps_code) {
       // retreive all records from db
-     // $data = Data::where('ps_code' , $ps_code)->get();
+      $data = Data::where('ps_code' , $ps_code)->get();
 return Excel::download(new UsersExport, 'trial.xlsx');
 
     }
@@ -257,13 +273,44 @@ return Excel::download(new UsersExport, 'trial.xlsx');
 
         return redirect()->route('form.index');
     }
-       public function updateform($id)
+       public function updateform(Request $request , $id)
     {
+          
+        $data = Data::where('id', $id)->firstOrFail();
 
-     
-           return view('user.insert',compact('id'));
+        if($request->hasFile('image')){
+
+            $image = time() . '-' . $request->file('image')->getClientOriginalName() . '.' . $request->file('image')->extension()  ; 
+            $request->file('image')->move(public_path('assets/images/profiles/'), $image);
+            $data->pic = $image;
+        }
+
+
+          $data->name = $request->name;
+          $data->gender= $request->gender;
+          $data->dob = $request->dob;
+          $data->email= $request->email;
+          $data->voter_id = $request->voter_id;
+          
+        dd($data); 
+          $data->update();
+
+
+
+          return redirect()->route('form.index');
+       
+          // return view('user.insert',compact('id'));
     }
 
+    function edit($id){
+
+        
+            $data = Data::find($id);
+        //dd($data->pic);
+
+            return view('user.edit',compact('data'));
+           // dd($data);
+    }
 
     /**
      * Remove the specified resource from storage.

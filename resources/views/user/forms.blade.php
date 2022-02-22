@@ -20,9 +20,10 @@
 <body style=" background-image: linear-gradient(72deg,red 30%, #fff  10%, #1919a3 90%)!important;">
 <div class="grey-bg container-fluid ">
   <section id="minimal-statistics">
-
-   <p>{{$data->ps_code}}</p>
-   <p>{{$data->polling_station_name}}</p>
+<div  class="text-center font-weight-bold mt-3">
+   <h3>POLLING STATION CODE : {{$data->ps_code}}</h3>
+   <h3>POLLING STATION NAME : {{$data->polling_station_name}}</h3>
+</div>
 <form action="{{route('form.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
   <div class="row justify-content-center mt-5">

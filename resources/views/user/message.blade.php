@@ -5,17 +5,17 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
+  <link rel="icon" href={{asset('assets/images/favicon-32x32.png')}} type="image/png" />
   <!--plugins-->
-  <link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
-  <link href="assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
-  <link href="assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
-  <link href="assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+  <link href={{asset('assets/plugins/simplebar/css/simplebar.css')}} rel="stylesheet" />
+  <link href={{asset('assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}} rel="stylesheet" />
+  <link href={{asset('assets/plugins/metismenu/css/metisMenu.min.css')}} rel="stylesheet" />
+  <link href={{asset('assets/plugins/datatable/css/dataTables.bootstrap5.min.css')}} rel="stylesheet" />
   <!-- Bootstrap CSS -->
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="assets/css/bootstrap-extended.css" rel="stylesheet" />
-  <link href="assets/css/style.css" rel="stylesheet" />
-  <link href="assets/css/icons.css" rel="stylesheet">
+  <link href={{asset('assets/css/bootstrap.min.css')}} rel="stylesheet" />
+  <link href={{asset('assets/css/bootstrap-extended.css')}} rel="stylesheet" />
+  <link href={{asset('assets/css/style.css')}} rel="stylesheet" />
+  <link href={{asset('assets/css/icons.css')}} rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
@@ -125,13 +125,14 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                            <table id="example" class="table table-striped table-bordered" style="width:100%;padding:10px;">
                                 <thead>
                                     <tr>
-                                        <th>EA CODE</th>
                                         <th>EA NAME</th>
+                                        <th>PS NAME</th>
+                                        <th>NAME</th>
                                         <th>POSITION</th>
-                                        <th>VOTERS_IDE</th>
+                                        <th>VOTER ID</th>
                                         <th>GENDER</th>
                                         <th>PHONE</th>
                                         <th>PICTURE</th>
@@ -139,41 +140,38 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+               
                                   <main class="col-md-12 p-5">
+        <div class="row">
+
           <div class="d-flex justify-content-end mb-4">
-            <a class="btn btn-primary" href="/data/pdf">Export to PDF</a>
+            <a class="btn btn-primary" href={{route('generate.PDF',$ps_code)}}>Export to PDF</a>
         </div>
         <div class="d-flex justify-content-end mb-4">
-            <a class="btn btn-primary" href="/data/excel">Export to excel</a>
+            <a class="btn btn-success" href={{route('generate.excel',$ps_code)}}>Export to excel</a>
+        </div>
         </div>
                                     @foreach($pollers as $pollers)
 
-                                    <tr>
+                                    <tr>                                       
+                                      <td>{{$pollers->ps_code}}</td>
                                         <td>{{$pollers->ps_code}}</td>
                                         <td>{{$pollers->name}}</td>
                                         <td>{{$pollers->position}}</td>
                                         <td>{{$pollers->voter_id}}</td>
                                         <td>{{$pollers->gender}}</td>
                                         <td>{{$pollers->phone}}</td>
-                                        <td><img src="assets/images/profiles/{{$pollers->pic}}" alt="" class="rounded-circle" width="60" height="60"></td>
+                                        <td><img src={{ asset('assets/images/profiles/' . $pollers->pic)}} alt="" class="rounded-circle" width="60" height="60"></td>
                                         <td class="text-center text-light">
-                                        <a class="btn btn-primary" href="{{route('form.insert', [$pollers->ps_code])}}">
-                                        <i class="fa fa-eye"></i> Get Link</a>
+                                        <a class="btn btn-primary" href="{{route('form.edit', [$pollers->id])}}">
+                                        <i class="fa fa-eye"></i>Update</a>
                                         </td>                             
                                    
                                     </tr>
                                     @endforeach
             
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>EA CODE</th>
-                                        <th>EA NAME</th>
-                                        <th>POLLING STATION CODE</th>
-                                        <th>POLLING STATION NAME</th>
-                                        <th>ACTION</th>
-                                    </tr>
-                                </tfoot>
+                               
                             </table>
                         </div>
                     </div>
@@ -198,19 +196,19 @@
 
 
   <!-- Bootstrap bundle JS -->
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src={{asset('assets/js/bootstrap.bundle.min.js')}}></script>
   <!--plugins-->
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
-  <script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
-  <script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
-  <script src="assets/js/pace.min.js"></script>
-  <script src="assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
-  <script src="assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
-  <script src="assets/js/table-datatable.js"></script>
+  <script src={{asset('assets/js/jquery.min.js')}}></script>
+  <script src={{asset('assets/plugins/simplebar/js/simplebar.min.js')}}></script>
+  <script src={{asset('assets/plugins/metismenu/js/metisMenu.min.js')}}></script>
+  <script src={{asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}></script>
+  <script src={{asset('assets/js/pace.min.js')}}></script>
+  <script src={{asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}></script>
+  <script src={{asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js')}}></script>
+  <script src={{asset('assets/js/table-datatable.js')}}></script>
     
   <!--app-->
-  <script src="assets/js/app.js"></script>
+  <script src={{asset('assets/js/app.js')}}></script>
   
 </body>
 
