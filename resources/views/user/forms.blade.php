@@ -76,7 +76,7 @@
 
                <div class="form-group">
                 <label for="username">Phone<span class="text-danger"> *</span></label>
-                <input type="number" name="phone" placeholder="Enter Phone number"  class="form-control">
+                <input type="text" name="phone" placeholder="0555555550"  class="form-control">
                         @if ($errors->has('phone'))
             <span class="text-danger">
                 <strong>{{ $errors->first('phone') }}</strong>
@@ -174,7 +174,7 @@
 
                <div class="form-group">
                 <label for="username">Phone<span class="text-danger"> *</span></label>
-                <input type="number" name="s_phone" placeholder="Enter Phone number"  class="form-control">
+                <input type="text" name="s_phone" placeholder="0555555550"  class="form-control">
                         @if ($errors->has('s_phone'))
             <span class="text-danger">
                 <strong>{{ $errors->first('s_phone') }}</strong>
@@ -273,7 +273,7 @@
 
                <div class="form-group">
                 <label for="username">Phone<span class="text-danger"> *</span></label>
-                <input type="number" name="o_phone" placeholder="Enter Phone number"  class="form-control">
+                <input type="text" name="o_phone" placeholder="0555555550"  class="form-control">
                         @if ($errors->has('o_phone'))
             <span class="text-danger">
                 <strong>{{ $errors->first('o_phone') }}</strong>
@@ -369,7 +369,7 @@
 
                <div class="form-group">
                 <label for="username">Phone<span class="text-danger"> *</span></label>
-                <input type="number" name="w_phone" placeholder="Enter Phone number"  class="form-control">
+                <input type="text" name="w_phone" placeholder="0555555550"  class="form-control">
                         @if ($errors->has('w_phone'))
             <span class="text-danger">
                 <strong>{{ $errors->first('w_phone') }}</strong>
@@ -463,7 +463,7 @@
 
                <div class="form-group">
                 <label for="username">Phone<span class="text-danger"> *</span></label>
-                <input type="number" name="y_phone" placeholder="Enter Phone number"  class="form-control">
+                <input type="text" name="y_phone" placeholder="0555555550"  class="form-control">
                         @if ($errors->has('y_phone'))
             <span class="text-danger">
                 <strong>{{ $errors->first('y_phone') }}</strong>

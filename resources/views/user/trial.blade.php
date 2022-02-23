@@ -50,11 +50,15 @@ th{
 
 </head>
 <body>
+  <div style="text-align:center;">
+    <h3>ELECTORAL AREA : {{$search[0]->polling_station_name}}</h3>
+    <h3>POLLING STATION : {{$search[0]->EA_NAME}}</h3>
+  </div>
   <div class="">
   <table class="table">
   	<thead>
 	<tr class="header">
-		  <th>PS CODE</th>
+   
           <th>NAME</th>
           <th>POSITION</th>
           <th>VOTERS ID</th>
@@ -70,7 +74,7 @@ th{
    @foreach($pollers as $pollers)
     
 <tr style="height40px;" class="{{($loop->iteration % 2 ==0)?'data-cell':'' }}" >
-	 <td class="cell">{{$pollers->ps_code}}</td>
+     
      <td class="cell">{{$pollers->name}}</td>
      <td class="cell">{{$pollers->position}}</td>
      <td class="cell">{{$pollers->voter_id}}</td>
