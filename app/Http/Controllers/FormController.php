@@ -193,7 +193,7 @@ class FormController extends Controller
   public function createcsv($ps_code) {
       // retreive all records from db
       $data = Data::where('ps_code' , $ps_code)->get();
-return Excel::download(new UsersExport, 'trial.xlsx');
+return Excel::download(new UsersExport($ps_code), 'trial.xlsx');
 
     }
 

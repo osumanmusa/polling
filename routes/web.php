@@ -32,3 +32,4 @@ Route::get('/picupdated/{id}',[App\Http\Controllers\FormController::class, 'edit
 Route::get('/data/{ps_code}/pdf', [App\Http\Controllers\FormController::class, 'createPDF'])->name('generate.PDF');
 Route::get('/data/{ps_code}/excel', [App\Http\Controllers\FormController::class, 'createcsv'])->name('generate.excel');
 
+Route::get('autocomplete', [App\Http\Controllers\HomeController::class, 'autocomplete'])->name('autocomplete');
