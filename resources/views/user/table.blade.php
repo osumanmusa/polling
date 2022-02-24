@@ -11,7 +11,7 @@
        <main class="col-md-12 p-5">
 		
 				<!--end breadcrumb-->
-				<h6 class="mb-0 text-uppercase">DataTable Example</h6>
+				<h6 class="mb-0 text-uppercase">Results</h6>
 				<hr/>
 				<div class="card">
 					<div class="card-body">

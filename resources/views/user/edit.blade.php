@@ -45,13 +45,21 @@
         @endif
 
               </div>
+              <?php 
+              $genders =[
+                'Male',
+                'Female'
+            ];
+              ?>
                <div class="form-group">
                 <label for="username">Sex<span class="text-danger"> *</span></label>
                 <select class="form-control form-select" name="gender" value="{{$data->gender}}">
                   <option value="" disabled >Select Gender</option>
-
-                  <option value="Male" selected="{{ ($data->gender == 'Female') ?true :false}}">Male</option>
-                  <option value="Female" >Female</option>
+                    @foreach($genders as $gender)
+                    <option value={{$gender}} @if($data->gender == $gender) selected @endif>{{$gender}}</option>
+                    @endforeach
+                  
+                 
                 </select>
                         @if ($errors->has('gender'))
             <span class="text-danger">
@@ -74,7 +82,7 @@
 
                <div class="form-group">
                 <label for="username">Phone<span class="text-danger"> *</span></label>
-                <input type="number" name="phone" placeholder="Enter Phone number"  class="form-control" value="{{$data->phone}}">
+                <input type="text" name="phone" placeholder="0555555555"  class="form-control" value="{{$data->phone}}">
                         @if ($errors->has('phone'))
             <span class="text-danger">
                 <strong>{{ $errors->first('phone') }}</strong>
@@ -105,7 +113,9 @@
 
 <div class="form-group">
                 <label for="username">  Picture<span class="text-danger"> *</span></label> <br>
-                <img  src={{ asset('assets/images/profiles/' . $data->pic ) }} alt="" class="rounded-circle" width="40" height="40">
+                <div class="mb-3">
+                <img  src={{ asset('assets/images/profiles/' . $data->pic ) }} alt=""  width="60" height="60" >
+                </div>
                 <input type="file" name="image" placeholder=""  class="form-control form-" value="{{$data->pic}}">
                     @if ($errors->has('image'))
             <span class="text-danger">

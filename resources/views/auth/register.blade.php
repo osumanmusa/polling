@@ -35,20 +35,12 @@
                 </div>
                 <div class="col-lg-6">
                   <div class="card-body p-4 p-sm-5">
-                    <h5 class="card-title">Sign Up</h5>
-                    <p class="card-text mb-5">See your growth and get consulting support!</p>
+                    <h5 class="card-title text-center mb-4">Sign Up</h5>
+                  
                     <form class="form-body" method="POST" action="{{ route('register') }}">
                         @csrf
-                      <div class="d-grid">
-                        <a class="btn btn-white radius-30" href="javascript:;"><span class="d-flex justify-content-center align-items-center">
-                            <img class="me-2" src="assets/images/icons/search.svg" width="16" alt="">
-                            <span>Sign up with Google</span>
-                          </span>
-                        </a>
-                      </div>
-                      <div class="login-separater text-center mb-4"> <span>OR SIGN UP WITH EMAIL</span>
-                        <hr>
-                      </div>
+                      
+                     
                         <div class="row g-3">
                           <div class="col-12 ">
                             <label for="inputName" class="form-label">Name</label>
