@@ -17,7 +17,7 @@
 
 
 </style>
-<body style=" background-image: linear-gradient(72deg,red 30%, #fff  10%, #1919a3 90%)!important;">
+<body >
 <div class="grey-bg container-fluid ">
   <section id="minimal-statistics">
 <div  class="text-center font-weight-bold mt-3">

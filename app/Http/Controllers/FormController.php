@@ -190,12 +190,16 @@ class FormController extends Controller
 
         return $pdf->stream('user.trial', array('Attachment' => false));
     }
-    //Function to convert from html to  excel 
-    public function createcsv($ps_code)
-    {
-        // retreive records from  data table
-        $data = Data::where('ps_code', $ps_code)->get();
-        return Excel::download(new UsersExport, 'trial.xlsx');
+
+
+
+//Function to convert from html to  excel 
+  public function createcsv($ps_code) {
+      // retreive all records from db
+      $data = Data::where('ps_code' , $ps_code)->get();
+return Excel::download(new UsersExport($ps_code), 'trial.xlsx');
+
+
     }
 
 
