@@ -26,8 +26,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+       // $datum = DB::table('polling_station')
+       // ->join('Code', 'polling_station.Code_id', '=', 'Code.id')
+       // ->select('code', 'Code.*')->get();
+
+        $polling_station_names = DB::table('polling_station')->select('polling_station_name','ps_code as polling_code')->get();
+
+        $ea_names = DB::table('Code')->select('EA_NAME','EA_CODE  as ea_code')->get();
+
+        $merged = $ea_names->merge($polling_station_names);
+      
+        $datum = $merged->all();
+   
+   
+
+
+                
+     return view('home')->with('datum',$datum);
     }
+
      public function search(Request $request)
     {
     $request->validate(['code'=>'required',
@@ -61,4 +78,37 @@ $search = DB::table('polling_station')
 
 
     }
+   public function autocomplete(Request $request){
+$query=$request->get('term','');
+        
+        $datum = DB::table('polling_station')
+        ->join('Code', 'polling_station.Code_id', '=', 'Code.id')
+        ->select('polling_station.*', 'Code.*')->get();
+$data=array();
+foreach($datum as $datum){
+$data[]=array($datum->ps_code,$datum->EA_NAME,$datum->EA_CODE,$datum->polling_station_name);
+}
+if(count($data))
+return$data;
+else
+return['value'=>'No Result Found','id'=>''];
+}
+
+
+
+
+
+   /*  public function autocomplete(Request $request)
+
+    {
+$data =  $datum = DB::table('polling_station')
+        ->join('Code', 'polling_station.Code_id', '=', 'Code.id')
+        ->select('polling_station.*', 'Code.*')->get();
+
+
+   
+
+        return response()->json($data);
+
+    }*/
 }

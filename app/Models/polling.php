@@ -17,6 +17,7 @@ class polling extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+       
         
     ];
        public function Code(){
