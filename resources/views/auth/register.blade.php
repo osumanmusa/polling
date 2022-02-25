@@ -1,132 +1,124 @@
-<!doctype html>
-<html lang="en" class="light-theme">
+<!DOCTYPE html>
+<html lang="zxx" class="js">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="{{asset('assets/images/favicon-32x32.png')}}" type="image/png" />
-  <!-- Bootstrap CSS -->
-  <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
-  <link href="{{asset('assets/css/bootstrap-extended.css')}}" rel="stylesheet" />
-  <link href="{{asset('assets/css/style.css')}}" rel="stylesheet" />
-  <link href="{{asset('assets/css/icons.css')}}" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-
-  <!-- loader-->
-    <link href="{{asset('assets/css/pace.min.css')}}" rel="stylesheet" />
-
-  <title>Skodash - Bootstrap 5 Admin Template</title>
+    <base href="../../../">
+    <meta charset="utf-8">
+    <meta name="author" content="Softnio">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <!-- Fav Icon  -->
+    <link rel="shortcut icon" href="./images/favicon.png">
+    <!-- Page Title  -->
+    <title>Registration | DashLite Admin Template</title>
+    <!-- StyleSheets  -->
+    <link rel="stylesheet" href={{asset('assets2/css/dashlite1.css?ver=2.9.1')}}>
+    <link id="skin-default" rel="stylesheet" href={{asset('assets2/css/theme1.css?ver=2.9.1')}}>
 </head>
 
-<body>
- <!--start wrapper-->
-  <div class="wrapper">
-    
-       <!--start content-->
-       <main class="authentication-content">
-        <div class="container-fluid">
-          <div class="authentication-card">
-            <div class="card shadow rounded-0 overflow-hidden">
-              <div class="row g-0">
-                <div class="col-lg-6 bg-login d-flex align-items-center justify-content-center">
-                  <img src="assets/images/error/login-img.jpg" class="img-fluid" alt="">
+<body class="nk-body ui-rounder npc-default pg-auth">
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main ">
+            <!-- wrap @s -->
+            <div class="nk-wrap nk-wrap-nosidebar">
+                <!-- content @s -->
+                <div class="nk-content ">
+                    <div class="nk-split nk-split-page nk-split-md">
+                        <div class="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white w-lg-45">
+                            <div class="absolute-top-right d-lg-none p-3 p-sm-5">
+                                <a href="#" class="toggle btn btn-white btn-icon btn-light" data-target="athPromo"><em class="icon ni ni-info"></em></a>
+                            </div>
+                            <div class="nk-block nk-block-middle nk-auth-body">
+                                <div class="brand-logo pb-5">
+                                    <a href="html/index.html" class="logo-link">
+                                       
+                                        <img class="logo-dark logo-img logo-img-lg" src="{{asset('assets1/images/logo.png')}}" srcset="./images/logo-dark2x.png 2x" alt="logo">
+                                    </a>
+                                </div>
+                                <div class="nk-block-head">
+                                    <div class="nk-block-head-content">
+                                        <h5 class="nk-block-title">Register</h5>
+                                        <div class="nk-block-des">
+                                            <p>Create New User Account</p>
+                                        </div>
+                                    </div>
+                                </div><!-- .nk-block-head -->
+                                <form class="form-body" method="POST" action="{{ route('register') }}">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label class="form-label" for="name">Name</label>
+                                        <div class="form-control-wrap">
+                                            <input type="text" class="form-control form-control-lg" name="name" placeholder="Enter your name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="email">Email </label>
+                                        <div class="form-control-wrap">
+                                            <input type="text" class="form-control form-control-lg" id="email" placeholder="Enter your email address" name="email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="password">Passcode</label>
+                                        <div class="form-control-wrap">
+                                            <a tabindex="-1" href="#" class="form-icon form-icon-right passcode-switch lg" data-target="password" >
+                                                <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                                <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                                            </a>
+                                            <input type="password" class="form-control form-control-lg" id="password" placeholder="Enter your passcode" name="password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="password">Confirm Password</label>
+                                        <div class="form-control-wrap">
+                                            <a tabindex="-1" href="#" class="form-icon form-icon-right passcode-switch lg" data-target="password" >
+                                                <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                                <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                                            </a>
+                                            <input type="password" class="form-control form-control-lg" id="password" placeholder="Enter your passcode" name="password_confirmation">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
+                                    </div>
+                                </form><!-- form -->
+                                <div class="form-note-s2 pt-4"> Already have an account ? <a href="{{route('login')}}"><strong>Sign in instead</strong></a>
+                                </div>
+
+                            </div><!-- .nk-block -->
+
+                        </div><!-- nk-split-content -->
+                        <div class="nk-split-content nk-split-stretch bg-lighter d-flex toggle-break-lg toggle-slide toggle-slide-right" data-content="athPromo" data-toggle-screen="lg" data-toggle-overlay="true">
+                            <div class="slider-wrap w-100 w-max-550px p-3 p-sm-5 m-auto">
+                                <div class="slider-init" data-slick='{"dots":false, "arrows":false}'>
+                                    <div class="slider-item">
+                                        <div class="nk-feature nk-feature-center">
+                                            <div class="nk-feature-img">
+                                                <img class="round" src="{{asset('assets1/images/6.png')}}" srcset="./images/slides/promo-a2x.png 2x" alt="">
+                                            </div>
+                                            
+                                        </div>
+                                    </div><!-- .slider-item -->
+
+                                </div><!-- .slider-init -->
+                                <div class="slider-dots"></div>
+                                <div class="slider-arrows"></div>
+                            </div><!-- .slider-wrap -->
+                        </div><!-- nk-split-content -->
+                    </div><!-- nk-split -->
                 </div>
-                <div class="col-lg-6">
-                  <div class="card-body p-4 p-sm-5">
-                    <h5 class="card-title">Sign Up</h5>
-                    <p class="card-text mb-5">See your growth and get consulting support!</p>
-                    <form class="form-body" method="POST" action="{{ route('register') }}">
-                        @csrf
-                      <div class="d-grid">
-                        <a class="btn btn-white radius-30" href="javascript:;"><span class="d-flex justify-content-center align-items-center">
-                            <img class="me-2" src="assets/images/icons/search.svg" width="16" alt="">
-                            <span>Sign up with Google</span>
-                          </span>
-                        </a>
-                      </div>
-                      <div class="login-separater text-center mb-4"> <span>OR SIGN UP WITH EMAIL</span>
-                        <hr>
-                      </div>
-                        <div class="row g-3">
-                          <div class="col-12 ">
-                            <label for="inputName" class="form-label">Name</label>
-                            <div class="ms-auto position-relative">
-                              <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-person-circle"></i></div>
-                              <input type="text" class="form-control radius-30 ps-5 @error('name') is-invalid @enderror" id="inputName" placeholder="Enter Name"  name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                          </div>
-                          <div class="col-12">
-                            <label for="inputEmailAddress" class="form-label">Email Address</label>
-                            <div class="ms-auto position-relative">
-                              <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-envelope-fill"></i></div>
-                              <input type="email" class="form-control radius-30 ps-5 @error('email') is-invalid @enderror" id="inputEmailAddress" placeholder="Email Address" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                          </div>
-                          <div class="col-12">
-                            <label for="inputChoosePassword" class="form-label">Enter Password</label>
-                            <div class="ms-auto position-relative">
-                              <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-lock-fill"></i></div>
-                              <input type="password" class="form-control radius-30 ps-5 @error('password') is-invalid @enderror" id="inputChoosePassword" placeholder="Enter Password" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                          </div>
-                           <div class="col-12">
-                            <label for="inputChoosePassword" class="form-label">Confirm Password</label>
-                            <div class="ms-auto position-relative">
-                              <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-lock-fill"></i></div>
-                              <input type="password" class="form-control radius-30 ps-5" id="inputChoosePassword" placeholder="Confirm Password" name="password_confirmation" required autocomplete="new-password">
-                             
-
-                            </div>
-                          </div>
-                          
-                          <div class="col-12">
-                            <div class="d-grid">
-                              <button type="submit" class="btn btn-primary radius-30">Sign up</button>
-                            </div>
-                          </div>
-                          <div class="col-12">
-                            <p class="mb-0">Already have an account? <a href="{{route('login')}}">Sign in here</a></p>
-                          </div>
-                        </div>
-                    </form>
-                 </div>
-                </div>
-              </div>
+                <!-- wrap @e -->
             </div>
-          </div>
+            <!-- content @e -->
         </div>
-       </main>
-        
-       <!--end page main-->
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+    <!-- JavaScript -->
+    <script src={{asset('assets/js/bundle.js?ver=2.9.1')}}></script>
+    <script src={{asset('assets/js/scripts.js?ver=2.9.1')}}></script>
 
-  </div>
-  <!--end wrapper-->
-
-  <!--plugins-->
-  <script src="{{asset('assets/js/jquery.min.js')}}"></script>
-  <script src="{{asset('assets/js/pace.min.js')}}"></script>
-
-  
-</body>
+ 
 
 </html>

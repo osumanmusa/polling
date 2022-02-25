@@ -12,6 +12,7 @@ use App\Http\Requests\DataRequest;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\UsersExport;
+use Illuminate\Support\Facades\Storage;
 
 class FormController extends Controller
 {
@@ -26,12 +27,20 @@ class FormController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($ps_code)
     {
-         $pollers=Data::latest()->paginate(10);
-      $pollerscount = Data::all()->count();
+        $search = DB::table('polling_station')
+            ->join('Code', 'polling_station.Code_id', '=', 'Code.id')
+            ->select('polling_station.polling_station_name', 'Code.EA_NAME')
+            ->where('polling_station.ps_code', 'like', '%' . $ps_code . '%')
+            ->get();
 
-        return view('user.message')->with('pollers',$pollers)->with('pollerscount',$pollerscount);
+
+
+        $pollers = Data::where('ps_code', $ps_code)->get();
+
+        return view('user.list')->with('pollers', $pollers)->with('ps_code', $ps_code)->with('search', $search);
+        ///  return view('user.message')->with('pollers', $pollers)->with('ps_code', $ps_code)->with('search', $search);
     }
 
 
@@ -42,9 +51,18 @@ class FormController extends Controller
      */
     public function create($ps_code)
     {
+        $check = Data::where('ps_code', $ps_code)->get();
+
+        if (count($check) > 0) {
+            return redirect()->route('form.index', $ps_code);
+        }
+
+
         $data = DB::table('polling_station')
             ->select('polling_station.*')->where('ps_code', '=', $ps_code)->first();
-        return view('user.forms')->with('data', $data);
+
+        return view('user.form1', compact('data'));
+        // return view('user.forms')->with('data', $data);
     }
 
     /**
@@ -55,32 +73,32 @@ class FormController extends Controller
      */
     public function store(DataRequest $request)
     {
-   //  dd($request);
-     
+
+
         $g_image = time() . '-' . $request->file('g_image')->getClientOriginalName() . '.' . $request->file('g_image')->extension();
         $request->file('g_image')->move(public_path('assets/images/profiles/'), $g_image);
 
-        
+
         $images = $request->file('image');
 
-        $c_image = time() . '-' . $images[0]->getClientOriginalName() . '.' . $images[0]->extension()  ; 
+        $c_image = time() . '-' . $images[0]->getClientOriginalName() . '.' . $images[0]->extension();
         $images[0]->move(public_path('assets/images/profiles/'), $c_image);
 
-        $s_image = time() . '-' . $images[1]->getClientOriginalName() . '.' . $images[1]->extension()  ; 
+        $s_image = time() . '-' . $images[1]->getClientOriginalName() . '.' . $images[1]->extension();
         $images[1]->move(public_path('assets/images/profiles/'), $s_image);
 
-        $o_image = time() . '-' . $images[2]->getClientOriginalName() . '.' . $images[2]->extension()  ; 
+        $o_image = time() . '-' . $images[2]->getClientOriginalName() . '.' . $images[2]->extension();
         $images[2]->move(public_path('assets/images/profiles/'), $o_image);
 
-        $w_image = time() . '-' . $images[3]->getClientOriginalName() . '.' . $images[3]->extension()  ; 
+        $w_image = time() . '-' . $images[3]->getClientOriginalName() . '.' . $images[3]->extension();
         $images[3]->move(public_path('assets/images/profiles/'), $w_image);
-          
-        $y_image = time() . '-' . $images[4]->getClientOriginalName() . '.' . $images[4]->extension()  ; 
-        $images[4]->move(public_path('assets/images/profiles/'), $y_image);    
+
+        $y_image = time() . '-' . $images[4]->getClientOriginalName() . '.' . $images[4]->extension();
+        $images[4]->move(public_path('assets/images/profiles/'), $y_image);
 
 
 
-      //Chairman 
+        //Chairman 
         $poller = new Data();
         $poller->name = $request->name;
         $poller->position = $request->position;
@@ -92,8 +110,7 @@ class FormController extends Controller
         $poller->pic = $c_image;
         $poller->dob = $request->dob;
 
-      //Secretary
-
+        //Secretary
         $s_poller = new Data();
         $s_poller->name = $request->s_name;
         $s_poller->position = $request->s_position;
@@ -104,7 +121,8 @@ class FormController extends Controller
         $s_poller->voter_id = $request->s_voter_id;
         $s_poller->pic = $s_image;
         $s_poller->dob = $request->s_dob;
-    //Organizer Data
+
+        //Organizer Data
         $o_poller = new Data();
         $o_poller->name = $request->o_name;
         $o_poller->position = $request->o_position;
@@ -125,7 +143,7 @@ class FormController extends Controller
         $w_poller->phone = $request->w_phone;
         $w_poller->email = $request->w_email;
         $w_poller->voter_id = $request->w_voter_id;
-        $w_poller->pic= $w_image;
+        $w_poller->pic = $w_image;
         $w_poller->dob = $request->w_dob;
 
         //Youth Organizer
@@ -142,9 +160,9 @@ class FormController extends Controller
 
         //Group image
         $group = new grouppicture();
-        $group->ps_id= $request->ps_code;
-        $group->picture= $g_image;
-        
+        $group->ps_id = $request->ps_code;
+        $group->picture = $g_image;
+
 
         //Save the data in database
         $poller->save();
@@ -154,116 +172,98 @@ class FormController extends Controller
         $o_poller->save();
         $group->save();
 
-        return redirect()->route('form.index');
-     
+        return redirect()->route('form.index', $request->ps_code);
     }
 
-//Function to convert from html to  PDF 
-  public function createPDF() {
-      // retreive all records from db
-     // $data = Data::where('ps_code' , $ps_code)->get();
-       $pollers = Data::all();
-      
-      // share data to view
-      view()->share('user.message',$pollers);
-     $pdf = PDF::loadView('user.trial', compact('pollers'));
-    // dd($pdf);
-      // download PDF file with download method
-     return $pdf->stream('user.trial', array('Attachment'=>false));
-      //return $pdf->download('trial.pdf');
+    //Function to convert from html to  PDF 
+    public function createPDF($ps_code)
+    {
 
-    }
-//Function to convert from html to  PDF 
-  public function createcsv() {
-      // retreive all records from db
-     // $data = Data::where('ps_code' , $ps_code)->get();
-return Excel::download(new UsersExport, 'trial.xlsx');
+        // retreive records from  data table
+        $search = DB::table('polling_station')
+            ->join('Code', 'polling_station.Code_id', '=', 'Code.id')
+            ->select('polling_station.polling_station_name', 'Code.EA_NAME')
+            ->where('polling_station.ps_code', 'like', '%' . $ps_code . '%')
+            ->get();
 
+        $pollers = Data::where('ps_code', $ps_code)->get();
+        $pdf = PDF::loadView('user.trial', compact('pollers', 'search'));
+
+        return $pdf->stream('user.trial', array('Attachment' => false));
     }
 
 
 
+    //Function to convert from html to  excel 
+    public function createcsv($ps_code)
+    {
+        // retreive all records from db
+        $data = Data::where('ps_code', $ps_code)->get();
+        return Excel::download(new UsersExport($ps_code), 'trial.xlsx');
+    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
+
+
+
+
+
+    // Update Holder's Information
+
+    public function updateform(Request $request, $id)
     {
         $request->validate([
-            'image.0' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048',
-            'image.1' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048',
-            'image.2' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048',
-            'image.3' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048',
-            'image.4' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048'
+            'name' => 'required|max:255',
+            'email' => 'nullable|email|max:255',
+            'dob' => 'required',
+            'gender' => 'required',
+            'voter_id' => 'required|regex:/^\d{10}$/',
+            'phone' => 'required|regex:/^0[2,5]{1}[0-9]{8}$/'
         ]);
+        $data = Data::where('id', $id)->firstOrFail();
 
-        $data = $request->post();
-        $ps_code= $request->ps_code;
-       //dd($code);
-        
+        if ($request->hasFile('image')) {
 
-        $images = $request->file('image');
-        $positions = $data['position'];
+            $request->validate([
+                'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            ]);
 
-         for ($i=0; $i<count($images); $i++) {
-        
-        
-            $image = time() . '-' . $images[$i]->getClientOriginalName() . '.' . $images[$i]->extension()  ; 
-            $images[$i]->move(public_path('assets/images/profiles/'), $image);
+            //Delete old image from storage
+            $imagePath = "/assets/images/profiles/" . $data->pic;
 
-       
-              $position = strtolower($positions[$i]);
-       
-            $pos ='';
-              switch ($position) {
-                    case 'chairman':
-                   $pos = 'Chairman';
-                   DB::update('update Data set pic = ? where ps_code = ? and position = ?',[$image , $ps_code,$pos]);      
-                        
-                        break;
+            if (\File::exists(public_path($imagePath))) {
+                \File::delete(public_path($imagePath));
+            }
 
-                    case 'secretary':
-                    $pos = 'Secretary';
-                     DB::update('update Data set pic = ? where ps_code = ? and position = ?',[$image , $ps_code , $pos]); 
-                    
-
-                        break;
-                    case 'organizer':
-                    $pos = 'Organizer';
-                    DB::update('update Data set pic = ? where ps_code = ? and position = ?',[$image , $ps_code,$pos]);
-                     
-                     
-                        break;
-                    case "women's organizer":
-                    $pos = "Women's Organizer";
-                     DB::update("update Data set pic = ? where ps_code = ? and position = ?",[$image , $ps_code,$pos]);
-                     
-                        break;
-                    case 'youth organizer':
-                    $pos ='Youth Organizer';
-                     DB::update('update Data set pic = ? where ps_code = ? and position = ?',[$image , $ps_code,$pos]);
-                    
-                        break;
+            //upload new image 
+            $image = time() . '-' . $request->file('image')->getClientOriginalName() . '.' . $request->file('image')->extension();
+            $request->file('image')->move(public_path('assets/images/profiles/'), $image);
+            $data->pic = $image;
         }
 
-        }
 
-      
-   
+        $data->name = $request->name;
+        $data->gender = $request->gender;
+        $data->dob = $request->dob;
+        $data->email = $request->email;
+        $data->voter_id = $request->voter_id;
+        $data->phone = $request->phone;
 
-        return redirect()->route('form.index');
+        //update the changed data
+        $data->update();
+
+
+
+        return redirect()->route('form.index', $data->ps_code);
     }
-       public function updateform($id)
+
+    function edit($id)
     {
 
-     
-           return view('user.insert',compact('id'));
-    }
 
+        $data = Data::find($id);
+        return view('user.edit1', compact('data'));
+        //  return view('user.edit', compact('data'));
+    }
 
     /**
      * Remove the specified resource from storage.
